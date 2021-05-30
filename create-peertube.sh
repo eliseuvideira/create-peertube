@@ -26,7 +26,8 @@ POSTGRES_USERNAME=$3
 POSTGRES_PASSWORD=$4
 
 get_domain () {
-  sed 's/.*\.\(.*\..*\)/\1/' <<< $1
+  # shellcheck disable=SC2001
+  sed 's/.*\.\(.*\..*\)/\1/' <<< "$1"
 }
 
 chmod 600 ./docker-volume/traefik/acme.json 
@@ -49,7 +50,7 @@ PEERTUBE_TRUST_PROXY=["127.0.0.1", "loopback", "172.18.0.0/16"]
 #PEERTUBE_SMTP_PASSWORD=
 PEERTUBE_SMTP_HOSTNAME=postfix
 PEERTUBE_SMTP_PORT=25
-PEERTUBE_SMTP_FROM=noreply@$(get_domain $DOMAIN_URL)
+PEERTUBE_SMTP_FROM=noreply@$(get_domain "$DOMAIN_URL")
 PEERTUBE_SMTP_TLS=false
 PEERTUBE_SMTP_DISABLE_STARTTLS=false
 PEERTUBE_ADMIN_EMAIL=$ADMIN_EMAIL
