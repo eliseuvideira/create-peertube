@@ -1,7 +1,6 @@
 version: "3.3"
 
 services:
-
   reverse-proxy:
     image: traefik:v1.7
     network_mode: "host"
@@ -10,8 +9,8 @@ services:
       - "--acme.email=${TRAEFIK_ACME_EMAIL}" # Let's Encrypt ACME email
       - "--acme.domains=${TRAEFIK_ACME_DOMAINS}" # Let's Encrypt ACME domain list
     ports:
-      - "80:80"     # The HTTP port
-      - "443:443"   # The HTTPS port
+      - "80:80" # The HTTP port
+      - "443:443" # The HTTPS port
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - ./docker-volume/traefik/acme.json:/etc/acme.json
@@ -38,7 +37,7 @@ services:
       traefik.port: "9000"
     # If you don't want to use a reverse proxy (not suitable for production!)
     # ports:
-      # - "80:9000"
+    # - "80:9000"
     volumes:
       - ./docker-volume/data:/data
       - ./docker-volume/config:/config
@@ -81,4 +80,4 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet:  172.18.0.0/16
+        - subnet: 172.18.0.0/16
